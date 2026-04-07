@@ -2,7 +2,7 @@
 
 This document outlines the field definitions and mapping logic for integrating simulation data from the Elysium web app into the energy community token flow.
 
-## 1. Elysium API Output Fields
+## 1. Elysium API Output Fields ?
 
 The following fields represent the core data required to initialize an energy community based on simulation results.
 
