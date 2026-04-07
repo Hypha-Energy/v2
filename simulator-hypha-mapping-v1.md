@@ -2,7 +2,7 @@
 
 This document defines the data structures and mapping logic for integrating Elysium’s high-fidelity simulation features into the Hypha Energy token flow ecosystem.
 
-## 1. Enriched API Output Fields
+## 1. API Output Fields based on engineering report
 
 The following fields incorporate Elysium’s advanced simulation capabilities, transitioning from static estimates to dynamic, hourly profiles.
 
