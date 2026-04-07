@@ -1,64 +1,56 @@
-# Simulator to Hypha Energy Integration Mapping
+# Elysium to Hypha Energy Integration Mapping 
 
-This document outlines the field definitions and mapping logic for integrating simulation data from the Elysium web app into the energy community token flow.
+This document defines the data structures and mapping logic for integrating Elysium’s high-fidelity simulation features into the Hypha Energy token flow ecosystem.
 
-## 1. Elysium API Output Fields ?
+## 1. Enriched API Output Fields
 
-The following fields represent the core data required to initialize an energy community based on simulation results.
+The following fields incorporate Elysium’s advanced simulation capabilities, transitioning from static estimates to dynamic, hourly profiles.
+
+### Dynamic Performance & Load Profiling
+* **`hourly_production_8760`**: An array of 8,760 values representing projected solar/battery output for every hour of the year.
+* **`load_profile_category`**: The specific consumer pattern generated via Elysium’s **Load Builder** (e.g., Residential, Industrial, or Mixed-Use).
+* **`weather_pattern_id`**: The meteorological data set used, allowing the Hypha system to calibrate real-time performance expectations.
+
+### Advanced Economic Modeling
+* **`optimized_lcoe_euro_kwh`**: The minimized Levelized Cost of Energy after Elysium’s automated component sizing.
+* **`simulated_payback_years`**: The projected timeline for full capital recovery, used to set financial milestones.
+* **`grid_tariff_schedule`**: The local grid rates used for calculating the delta between P2P sharing and grid export revenue.
 
 ### Hardware Configuration
-* **`pv_capacity_kwp`**: Total peak power of the solar installation (e.g., 50.0).
-* **`battery_storage_kwh`**: Total usable energy storage capacity (e.g., 20.0).
-* **`inverter_power_kw`**: Total power rating of the system inverters.
-* **`asset_details`**: Array of specific component metadata (brand, model, efficiency).
-
-### Financial Data
-* **`total_capex_euro`**: Total upfront investment required for hardware and installation.
-* **`annual_opex_euro`**: Estimated yearly costs for maintenance and insurance.
-* **`lcoe_euro_kwh`**: Levelized Cost of Energy (the baseline generation cost over the asset's life).
-
-### Performance Metrics
-* **`projected_annual_gen_kwh`**: Total estimated energy production for the first year.
-* **`self_consumption_ratio`**: Percentage of energy consumed locally versus exported.
-* **`export_limit_kw`**: Maximum grid export capacity allowed at the site.
+* **`optimized_pv_kwp` / `optimized_battery_kwh`**: The ideal hardware sizes suggested by Elysium’s **Intelligent Optimization**.
 
 ---
 
-## 2. Token Flow Mapping Logic
+## 2. Strategic Mapping to Hypha Flow
 
-The simulation data from Elysium maps directly to the capitalization and operational layers of the token model.
+The enriched data from Elysium automates several key components of the Hypha Energy model.
 
-### Capitalization (Eparts & Ebonds)
-* **Source**: `total_capex_euro`
-* **Mapping**: The CAPEX is used to determine the total value of tokens issued to fund the installation.
-* **Logic**: 
-    * [cite_start]**Eparts**: Represent participation and ownership rights[cite: 3]. [cite_start]These are issued to members and participants in exchange for capital[cite: 3].
-    * [cite_start]**Ebonds**: Debt financier contributions are mapped to bond tokens[cite: 3, 4].
+### Capitalization (Ebonds & Eparts)
+* **Logic**: Use the **Economic Modeling** data to automate token issuance.
+* **Mapping**: 
+    * **Ebonds**: The `simulated_payback_years` and `annual_opex_euro` define the maturity and interest rate for debt tokens.
+    * **Eparts**: The remaining CAPEX not covered by Ebonds is tokenized as equity shares for members and participants.
 
-### Asset Initialization
-* **Source**: `pv_capacity_kwp`, `battery_storage_kwh`
-* **Mapping**: These fields define the **Energy Assets** block.
-* [cite_start]**Logic**: The hardware is purchased on the global market using the raised capital (EUROC)[cite: 4]. [cite_start]These physical assets provide the economical consumption value recorded in the system[cite: 6].
+### Operational Minting (Nano-PPAs)
+* **Logic**: Move from flat monthly estimates to hourly minting ceilings.
+* **Mapping**: The **`hourly_production_8760`** profile acts as the oracle baseline for the minting of **Nano-PPAs** (1 kWh per 15m contracts).
+* **Benefit**: This ensures that the availability of consumption tokens in the app matches the simulated physical availability of energy.
 
-### Operational Generation (Nano-PPAs)
-* **Source**: `projected_annual_gen_kwh`
-* **Mapping**: Sets the minting ceiling for **Nano-PPAs**.
-* [cite_start]**Logic**: Assets generate 1 kWh of value per 15-minute interval, which is calculated and distributed as Nano-PPAs[cite: 6].
+### Pricing (Cost-Price-Plus)
+* **Logic**: Establish a transparent, data-backed price for members.
+* **Mapping**: The **`optimized_lcoe_euro_kwh`** serves as the "cost" foundation.
+* **Benefit**: Members pay this base cost plus a predefined margin (in EUROC) to ensure the cooperative's sustainability and investor returns.
 
-### Pricing & Returns
-* **Source**: `lcoe_euro_kwh`, `self_consumption_ratio`
-* **Mapping**: Used to set the **Cost-Price-Plus** logic.
-* **Logic**: 
-    * [cite_start]Members return 1 Nano-PPA per kWh consumed and pay a "cost-price-plus" rate[cite: 8]. 
-    * The `lcoe_euro_kwh` provides the "cost" baseline for this calculation.
-    * [cite_start]Excess energy not used for self-consumption is exported to the grid[cite: 9].
-    * [cite_start]Income from grid exports and local consumers provides the returns for external investors[cite: 10].
+### Revenue Sharing & Grid Interaction
+* **Logic**: Automate the distribution of income based on Elysium’s **Energy Flow Optimization**.
+* **Mapping**: The ratio of local consumption vs. grid export determines the flow of EUROC into the **Revenue Sharing Agreement**. 
+* **Outcome**: High self-consumption rates identified by Elysium directly increase the yield for `Eparts` holders.
 
 ---
 
 ## 3. Integration Workflow
 
-1.  **Simulate**: Run the hardware and financial setup in Elysium to generate the report.
-2.  [cite_start]**Onboard**: Import the Elysium API output into the onboarding tool to assist in deciding token distribution options[cite: 1].
-3.  [cite_start]**Tokenize**: Automatically calculate the required supply of Eparts and Ebonds to cover the simulated CAPEX[cite: 3].
-4.  [cite_start]**Monitor**: Connect smart meters to track real-time generation against the simulated `projected_annual_gen_kwh` to trigger Nano-PPA minting[cite: 12].
+1.  **Simulation Phase**: Use Elysium’s **Load Builder** and **8760-hour Simulation** to design the optimal community hardware setup.
+2.  **Onboarding Phase**: The **Hypha Onboarding Tool** ingests the Elysium API output to suggest the ideal split between `Eparts` and `Ebonds`.
+3.  **Deployment Phase**: Smart contracts are initialized with the `hourly_production_8760` profile and `optimized_lcoe` as immutable parameters.
+4.  **Operational Phase**: Real-time smart meter data is compared against the Elysium simulation to trigger automated payouts and Nano-PPA distribution.
