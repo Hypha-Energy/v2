@@ -44,7 +44,7 @@ I am responsible for the **Postgres/TimescaleDB** instance, which serves as our 
 | **0** | **Physical Edge** | **Zek** | **zigbee2mqtt** | Managed IoT Gateway | Azure IoT Edge |
 | **0b** | **Data Gen** | **Zek** | **Existing Patterns** | Real Meters | Real Meters |
 | **A** | **Price Oracle** | **Zek** | **C# WebJob** | AWS Equivalent | Azure Functions |
-| **1** | **MQTT Broker** | **Zek** | **HiveMQ / IoT Hub** | HiveMQ + IoT Core | IoT Hub (S-Tier) |
+| **1** | **MQTT Broker** | **Zek** | **EMQX Platform / IoT Hub** | HiveMQ/Mosquito + IoT Core | IoT Hub (S-Tier) |
 | **2** | **Ingestion** | **Zek** | **C# WebJob** | AWS Equivalent | Azure Functions |
 | **3** | **Handover DB** | **Zek/Vlad** | **Postgres / Timescale** | AWS RDS (Managed) | Azure DB (Flexible) |
 | **4** | **VPP Logic** | Vlad | Node.js | AWS Lambda | Azure Functions |
