@@ -46,12 +46,12 @@ I am responsible for the **Postgres/TimescaleDB** instance, which serves as our 
 | **A** | **Price Oracle** | **Zek** | **C# WebJob** | AWS Equivalent | Azure Functions |
 | **1** | **MQTT Broker** | **Zek** | **EMQX Platform / IoT Hub** | HiveMQ/Mosquito + IoT Core | IoT Hub (S-Tier) |
 | **2** | **Ingestion** | **Zek** | **C# WebJob** | AWS Equivalent | Azure Functions |
-| **3** | **Handover DB** | **Zek/Vlad** | **Postgres / Timescale** | AWS RDS (Managed) | Azure DB (Flexible) |
+| **3** | **Handover DB** | **Zek** | **Postgres / Timescale** | AWS RDS (Managed) | Azure DB (Flexible) |
 | **4** | **VPP Logic** | Vlad | Node.js | AWS Lambda | Azure Functions |
 | **5** | **EMS Logic** | Vlad | Node.js | AWS Lambda | Azure Functions |
 | **6** | **Blockchain** | Vlad | Base Chain | Base (KMS) | Base (Key Vault HSM) |
 | **7** | **Settlement** | Vlad | Base Contracts | Embedded Wallets | Embedded Wallets |
-| **M** | **Monitoring** | **Zek/Vlad** | **Grafana Cloud** | Grafana Enterprise | Managed Grafana |
+| **M** | **Monitoring** | **Zek** | **Grafana Cloud** | Grafana Enterprise | Managed Grafana |
 
 ---
 
