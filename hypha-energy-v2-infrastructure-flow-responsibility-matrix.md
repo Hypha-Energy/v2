@@ -51,7 +51,8 @@ I am responsible for the **Postgres/TimescaleDB** instance, which serves as our 
 | **5** | **EMS Logic** | Vlad | Node.js | AWS Lambda | Azure Functions |
 | **6** | **Blockchain** | Vlad | Base Chain | Base (KMS) | Base (Key Vault HSM) |
 | **7** | **Settlement** | Vlad | Base Contracts | Embedded Wallets | Embedded Wallets |
-| **M** | **Monitoring** | **Zek** | **Grafana Cloud** | Grafana Enterprise | Managed Grafana |
+| **M** | **Monitoring** | **Zek** | **Grafana Cloud** | Grafana Enterprise | Managed Grafana | 
+https://hyphaenergy.grafana.net/public-dashboards/60ef8d23c9484f7dbfa76e127c503892
 
 ---
 
