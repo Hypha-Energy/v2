@@ -139,11 +139,11 @@ Surplus (ρ ≥ 1):  P_eff = P_base - (α × (ρ - 1))
 Deficit (ρ < 1):  P_eff = P_base + (β × (1 - ρ))
 ```
 
-**Elysium**
-The third-party high-fidelity energy simulation platform. Its API output (`hourly_production_8760`, `optimized_lcoe_euro_kwh`, `simulated_payback_years`) is ingested by the Hypha Onboarding Tool to set token issuance parameters, pricing baselines, and Nano-PPA minting schedules.
+**[Elysium](https://design.hypha.energy/)**
+The third-party high-fidelity energy simulation platform.
 
 **EMS (Energy Management System)**
-The software component (owned by Vlad) that physically controls the community Battery via MQTT commands. The only software component that issues physical control actions. Runs alongside the VPP in the same backend service. Publishes commands to topic `community/{id}/battery/command`.
+The software component that physically controls
 
 **Energy Credit**
 The positive-balance on-chain representation of what the community owes a member. Stored as an ERC-20 token (`EnergyToken`) visible in any crypto wallet. Earned when a member's ownership revenue exceeds their consumption charges within an interval.
@@ -206,7 +206,7 @@ The price per kWh for energy imported from the external grid. Sourced from exter
 ## H
 
 **Handover DB**
-The PostgreSQL/TimescaleDB database instance that serves as the boundary between Zek's data pipeline (raw ingestion and aggregation) and Vlad's VPP/EMS logic. The `interval_readings` table is the primary handover artifact.
+The PostgreSQL/TimescaleDB database instance that serves as the boundary between the data pipeline (raw ingestion and aggregation) and the VPP/EMS logic.
 
 **HiveMQ Cloud**
 The managed MQTT broker platform used for telemetry from edge meters. Supports TLS client certificate authentication per meter. Free tier supports fewer than 100 devices.
@@ -334,9 +334,6 @@ The third step of the Fair-Split Algorithm. Any remaining deficit after Passes 1
 grid(m) = deficit(m)   -- for all m where deficit(m) > 0
 ```
 
-**pg_cron**
-The PostgreSQL extension that runs the 15-minute aggregation job (`*/15 * * * *`) entirely within the database, summarizing `raw_readings` into `interval_readings`. Zero additional infrastructure required.
-
 **POC (Proof of Concept)**
 The current sprint mindset: prioritise speed and validation over production hardening. Explicitly excluded from this phase: automated billing, ML load forecasting, fiat gateways, and hardened edge security.
 
@@ -433,7 +430,7 @@ See *Fair-Split Algorithm*, *Pass 1*, *Pass 2*, *Pass 3*.
 ## V
 
 **VPP (Virtual Power Plant)**
-The backend software component (owned by Vlad, Node.js/TypeScript) that runs the Fair-Split Algorithm every 15 minutes. Reads from `interval_readings` and the blockchain (ownership, PPA prices), calculates per-member per-source settlement entries, writes to `settlement_batches`, and submits a single transaction to the smart contract.
+The backend software component (Node.js/TypeScript) that runs the Fair-Split Algorithm every 15 minutes.
 
 ---
 
