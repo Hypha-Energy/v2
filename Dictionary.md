@@ -17,7 +17,7 @@ A percentage of LOCAL source revenue (expressed in basis points) collected by th
 - Example: `aggregatorFeeBps = 300` → 3% of all solar + battery revenue goes to Hypha Energy.
 
 **Algorithmic Engine**
-The pricing component within the Price Oracle that calculates the `Effective Price (P_eff)` for community energy flows using the Coverage Ratio and DAO-voted coefficients (Alpha, Beta, Base Price). Distinct from Market Pricing, which is used for Retailer flows.
+The pricing component within the Price Oracle that calculates the `Cost Price Plus` for community energy flows using the Coverage Ratio and DAO-voted coefficients (Alpha, Beta, Base Price). Distinct from Market Pricing, which is used for Retailer flows.
 
 **Alpha (α)**
 A DAO-voted coefficient that controls how fast the internal price *decreases* when the community is in Surplus (`ρ ≥ 1`).
