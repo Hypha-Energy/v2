@@ -84,15 +84,14 @@ struct ConsumptionReading {
 ```
 
 **Coverage Ratio (ρ)**
+
+- Surya suggested Actual Coverage RAtio and Predicted .
 The ratio of total community generation to total community consumption within a single 15-minute Interval. The primary input to the Algorithmic Engine.
 ```
 ρ = Total Community Generation (kWh) / Total Community Consumption (kWh)
 ```
 - `ρ ≥ 1` → **Surplus** → price decreases via Alpha (α)
 - `ρ < 1` → **Deficit** → price increases via Beta (β)
-
-**Cost-Price-Plus**
-The member pricing philosophy: the `optimized_lcoe_euro_kwh` (from Elysium simulation) is the transparent cost base. A predefined margin is added for cooperative sustainability and investor returns.
 
 ---
 
@@ -123,7 +122,7 @@ The attribute on a meter reading that categorises the type of energy flow:
 - `import` — energy flowing in from the external grid
 
 **DSO (Distribution System Operator)**
-The regulated utility company that owns and operates the physical electricity network. Charges a fixed Network Fee (`ProsumerDSONetworkFee`) for use of its infrastructure.
+The regulated utility company that operates the physical electricity network. Charges a fixed Network Fee (`ProsumerDSONetworkFee`) for use of its infrastructure.
 
 ---
 
@@ -132,7 +131,7 @@ The regulated utility company that owns and operates the physical electricity ne
 **Ebond**
 A debt token representing a fixed-income instrument in the community's capital structure. Maturity and interest rate are derived from `simulated_payback_years` and `annual_opex_euro` from the Elysium simulation. Investors receive periodic interest payments.
 
-**Effective Price (`P_eff`)**
+**Cost Price Plus (`P_eff`)**
 The final calculated price per kWh for a given Interval, as output by the Algorithmic Engine. Used as the settlement price for community energy flows.
 ```
 Surplus (ρ ≥ 1):  P_eff = P_base - (α × (ρ - 1))
@@ -155,13 +154,12 @@ A discrete supply of electricity in the community with its own price and ownersh
 - `IMPORT` — external grid (last resort, most expensive)
 
 **EnergyPPAImplementation**
+
+--Edgar thinks i t is NFT managed my smart contract, managing state changes.---
 The primary smart contract (Solidity, UUPS proxy pattern) that stores all member balances, ownership configuration, and settlement logic. Exposes `consumeEnergy()` for VPP settlement submissions and `settleOwnDebt()` for member debt repayment.
 
 **EnergySettlement**
 A standalone helper smart contract that handles EURC stablecoin transfers for debt settlement. Members call `settleOwnDebt(eurcAmount)` or `settleDebt(debtor, eurcAmount)` to repay negative balances with real money.
-
-**EnergySourceToken**
-An ERC-20 token (v2 architecture) representing ownership shares in a specific energy source (one token contract per source). Holding 30% of a source's token supply = 30% ownership of that source. Enables transferable, wallet-visible ownership without requiring on-chain ownership tables.
 
 **Epart**
 An equity token representing an ownership share in the community's energy assets. The CAPEX not covered by Ebonds is tokenized as Eparts for members and investors. Holders earn revenue proportional to their ownership share each settlement interval.
@@ -200,7 +198,7 @@ The national electricity network. Used as the energy source of last resort when 
 
 **Grid Import Price (`gridImportPriceCt`)**
 The price per kWh for energy imported from the external grid. Sourced from external retail tariff or spot market APIs. Applied only after all LOCAL and BATTERY sources are exhausted (Pass 3 of the Fair-Split Algorithm).
-
+- Different components, Peak Tariff, Taxes , Suriya will update
 ---
 
 ## H
